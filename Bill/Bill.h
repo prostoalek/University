@@ -16,7 +16,7 @@ private:
 	void setPayableAmount(double _payableAmount);
 public:
 	Bill();
-	Bill(string _lastName, string _payableAmount, double _feePerMinute, double _discount, Time _dialogStartTime, Time _dialogEndTime);
+	Bill(string _lastName, string _phoneNumber, double _feePerMinute, double _discount, Time _dialogStartTime, Time _dialogEndTime);
 	
 	string getLastName();
 	string getPhoneNumber();
@@ -34,8 +34,8 @@ public:
 	void setDialogEndTime(Time _dialogEndTime);
 
 	
-	void countUpPayableAmount();
-	double countMinutes();
+	void calculatePayableAmount();
+	double dialogDurationInMinutes();
 	string toString();
 
 };

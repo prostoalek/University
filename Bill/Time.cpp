@@ -8,16 +8,16 @@ Time::Time()
 	second = 0;
 }
 
-Time::Time(int a, int b, int c) {
-	hour = a;
-	minute = b; 
-	second = c; 
+Time::Time(int _hour, int _minute, int _second) {
+	hour = _hour;
+	minute = _minute; 
+	second = _second; 
 }
 
-Time::Time(int a) { 
-	hour = (a / 3600); 
-	minute= (a - hour * 3600) / 60; 
-	second = a - hour * 3600 - minute* 60; 
+Time::Time(int _second) { 
+	hour = (_second / 3600); 
+	minute= (_second - hour * 3600) / 60; 
+	second = _second - hour * 3600 - minute * 60; 
 }
 
 Time::Time(const char* str)
@@ -33,6 +33,7 @@ Time::Time(const char* str)
 			n++;
 			a = "";
 		}
+
 	hour = obj[0];
 	minute= obj[1];
 	second = obj[2];
@@ -67,7 +68,7 @@ Time Time::operator-(Time& obj)
 	int _minute = this->minute;
 	int _second = this->second;
 
-	if (this->toSeconds() >- obj.toSeconds()) {
+	if (this->toSeconds() >= obj.toSeconds()) {
 
 		_second -= obj.second;
 		_minute -= obj.minute;
@@ -182,6 +183,6 @@ int Time::toMinutes()
 
 string Time::toString()
 {
-	return to_string(hour) + ":" + to_string(minute) + ":" + to_string(second);
+	return to_string(this->hour) + ":" + to_string(this->minute) + ":" + to_string(this->second);
 }
 

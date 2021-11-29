@@ -7,13 +7,13 @@ void Bill::setPayableAmount(double _payableAmount)
 
 Bill::Bill()
 {
-	lastName = "Pupkin";
-	phoneNumber = "88005553535";
+	lastName = "unknown";
+	phoneNumber = "unknown";
 	feePerMinute = 0;
 	discount = 0;
 	dialogStartTime = Time();
 	dialogEndTime = Time();
-	countUpPayableAmount();
+	calculatePayableAmount();
 }
 
 Bill::Bill(string _lastName, string _phoneNumber, double _feePerMinute, double _discount, Time _dialogStartTime, Time _dialogEndTime)
@@ -26,12 +26,12 @@ Bill::Bill(string _lastName, string _phoneNumber, double _feePerMinute, double _
 		discount = _discount;
 
 	dialogStartTime = _dialogStartTime;
-	dialogEndTime - _dialogEndTime;
+	dialogEndTime = _dialogEndTime;
 
 	if (_dialogStartTime > _dialogEndTime)
 		swap(dialogStartTime, dialogEndTime);
 
-	countUpPayableAmount();
+	calculatePayableAmount();
 }
 
 string Bill::getLastName()
@@ -91,26 +91,28 @@ void Bill::setDiscount(double _discount)
 
 void Bill::setDialogStartTime(Time _dialogStartTime)
 {
-	dialogStartTime = _dialogStartTime;
+	if (_dialogStartTime < dialogEndTime)
+		dialogStartTime = _dialogStartTime;
 }
 
 void Bill::setDialogEndTime(Time _dialogEndTime)
 {
-	dialogEndTime = _dialogEndTime;
+	if (dialogStartTime < _dialogEndTime)
+		dialogEndTime = _dialogEndTime;
 }
 
-void Bill::countUpPayableAmount()
+void Bill::calculatePayableAmount()
 {
-	payableAmount = feePerMinute * countMinutes() * (1 - discount);
+	payableAmount = feePerMinute * dialogDurationInMinutes() * (1 - discount / 100);
 }
 
-double Bill::countMinutes()
+double Bill::dialogDurationInMinutes()
 {
 	return ((dialogEndTime - dialogStartTime).toMinutes());
 }
 
 string Bill::toString()
 {
-	return "Last name: " + lastName + "\nPhone number: " + phoneNumber + "\nFee per minute" + to_string(feePerMinute) + 
-		"Dialog begins at " + dialogStartTime.toString() + "Dialog ends at " + dialogEndTime.toString() + "Payable amount: " + to_string(payableAmount);
+	return "Last name: " + lastName + "\nPhone number: " + phoneNumber + "\nFee per minute: " + to_string(feePerMinute) + 
+		"\nDialog begins at " + dialogStartTime.toString() + "\nDialog ends at " + dialogEndTime.toString() + "\nPayable amount: " + to_string(payableAmount);
 }

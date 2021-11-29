@@ -11,8 +11,8 @@ class Time {
 
 public:
 	Time();
-	Time(int a, int b, int c);
-	Time(int a);
+	Time(int _hour, int _minute, int _second);
+	Time(int _second);
 	Time(const char* str);
 
 	int getHour();
