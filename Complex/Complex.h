@@ -10,7 +10,7 @@ using namespace std;
 
 class Complex {
 private:
-	double A, B;
+	double* A, * B;
 
 public:
 	Complex();
