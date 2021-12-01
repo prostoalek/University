@@ -4,8 +4,9 @@
 using namespace std;
 
 int main()
-{
-    Tree tree(8);
+{          
+
+    /*Tree tree(8);
 
     tree.add(3);
     tree.add(1);
@@ -29,6 +30,6 @@ int main()
 
     //tree.deleteNode(tree.root, 8);
 
-    tree.print(Cool);
+    tree.print(Cool);*/
 
 }

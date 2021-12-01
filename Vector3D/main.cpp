@@ -5,17 +5,20 @@
 
 int main() {
 	setlocale(0, "");
-	//Triad a, b;
-	cout << "Создайте 2 вектора числами\n";
+
+	cout << "Задайте 2 вектора a и b числами\n";
 
 	double q1, q2, q3, p1, p2, p3;
 	cin >> q1 >> q2 >> q3 >> p1 >> p2 >> p3;
 
-	Vector3D a(q1, q2, q3);
-	Vector3D b(p1, p2, p3);
+	Vector3D a(q1, q2, q3), b(p1, p2, p3), c(b), d;
 
-	//cin >> a >> b;
-	cout << a + b;
+	cout << "\n\n" << a << b << c << d;
 
+	cout << "\nСумма векторов a и b: \n" << a + b 
+		 << "\nСкалярное произведение векторов a и b: \n" << a * b 
+	 	 << "\n\nПроизвведение вектора a на 25: \n" << a * 25;
+
+	cout << "\na != b: " << (a != b) << "\nb == c: " << (b == c);
 
 }

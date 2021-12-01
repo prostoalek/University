@@ -38,4 +38,5 @@ public:
     void del(Node* ptr);
     void delAll();
     Node* operator[] (const int index);
+    Node* FindMin();
 };

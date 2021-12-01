@@ -1,17 +1,5 @@
 #include "Vector3D.h"
 
-Vector3D::Vector3D()
-{
-	Triad();
-}
-
-Vector3D::Vector3D(double x, double y, double z)
-{
-	Triad(x, y, z);
-}
-
-
-
 Vector3D Vector3D::operator+(Vector3D& obj)
 {
 	return Vector3D(this->getTriad() + obj.getTriad());
@@ -30,14 +18,19 @@ double Vector3D::operator*(Vector3D& vector3d)
 	return ax * bx + ay * by + az * bz;
 }
 
+Vector3D Vector3D::operator*(double term)
+{
+	return (this->getTriad() * term);
+}
+
 ostream& operator<<(ostream& out, Vector3D vector3d)
 {
 	out << vector3d.getTriad();
 	return out;
 }
 
-istream& operator>>(istream& in, Vector3D vector3d)
-{
-	in >> vector3d.getTriad();
-	return in;
-}
+//istream& operator>>(istream& in, Vector3D vector3d)
+//{
+//	in >> vector3d.getTriad();
+//	return in;
+//}

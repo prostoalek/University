@@ -127,6 +127,7 @@ void List::del(List::Node* ptr) {
         std::cout << "Element does not exist." << std::endl;
         return;
     }
+
     previous->next = ptr->next;
     delete ptr;
 }
@@ -147,5 +148,28 @@ List::Node* List::operator[] (const int index) {
             return nullptr;
     }
     return p;
+}
+
+
+List::Node* List::FindMin()
+{
+    Node* n = head;
+    Node* minN = head;
+
+    if (isEmpty())
+        return 0;
+    else
+    {
+        for (; isEmpty(); n = n->next)
+        {
+            if (n->value < minN->value)
+            {
+                //min = n->value;
+                minN = n;
+            }
+            std::cout<< "min = " << minN->value << std::endl;
+            return minN;
+        }
+    }
 }
 

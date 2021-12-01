@@ -35,5 +35,5 @@ public:
 
 
 	friend ostream& operator<<(ostream&, Triad);
-	friend istream& operator>>(istream&, Triad);
+	//friend istream& operator>>(istream&, Triad);
 };

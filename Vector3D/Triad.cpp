@@ -88,17 +88,17 @@ ostream& operator<<(ostream& out, Triad triad)
 	ay = triad.Y;
 	az = triad.Z;
 
-	out << ax << ", " << ay << ", " << az << "\n";
+	out << "(" << ax << ", " << ay << ", " << az << ")" << "\n";
 	return out;
 }
 
-istream& operator>>(istream& in, Triad triad)
-{
-	double ax, ay, az;
-	ax = triad.X;
-	ay = triad.Y;
-	az = triad.Z;
-
-	in >> ax >> ay >> az;
-	return in;
-}
+//istream& operator>>(istream& in, Triad triad)
+//{
+//	double ax, ay, az;
+//	ax = triad.X;
+//	ay = triad.Y;
+//	az = triad.Z;
+//
+//	in >> ax >> ay >> az;
+//	return in;
+//}

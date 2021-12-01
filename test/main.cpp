@@ -1,20 +1,25 @@
-п»ї#include <iostream>
-#include <string>
-//#include "Date.h"
-#include "Payment.h"
+#include<iostream>
+#include "Triad.h"
+#include "vector3D.h"
 
-using namespace std;
+int main() {
 
+	setlocale(0, "");
+	//Triad a, b;
+	cout << "Создайте 2 вектора числами\n";
 
-int main()
-{
-    setlocale(LC_ALL, "Russian");
-    Payment max;
-    max.read();
-    max.vichisl_nach_summ();
-    max.vichisl_yder_summ();
-    max.vichisl_zp();
-    max.Display();
-    max.stazh();
+	//double q1, q2, q3, p1, p2, p3;
+	//cin >> q1 >> q2 >> q3 >> p1 >> p2 >> p3;
 
+	//vector3D a(q1, q2, q3);
+	//vector3D b(p1, p2, p3);
+
+	////cin >> a >> b;
+	//cout << a + b;
+
+	Triad a, b;
+
+	cin >> a >> b;
+	cout << a << b << "\n";
+	cout << a + b;
 }
