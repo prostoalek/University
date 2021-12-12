@@ -13,7 +13,7 @@ int main() {
 
 	Vector3D a(q1, q2, q3), b(p1, p2, p3), c(b), d;
 
-	cout << "\n\n" << a << b << c << d;
+	cout << "\n\na: " << a << "b: " << b << "c: " << c << "d: " << d;
 
 	cout << "\n—умма векторов a и b: \n" << a + b 
 		 << "\n—кал€рное произведение векторов a и b: \n" << a * b 
