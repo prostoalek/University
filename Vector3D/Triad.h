@@ -24,16 +24,14 @@ public:
 	void setY(double y);
 	void setZ(double z);
 
-	Triad getTriad();
-
 	Triad operator + (double term);
-	Triad operator + (Triad triad);
+	Triad operator + (const Triad& triad);
+
 	Triad operator * (double term);
 
-	bool operator == (Triad& term);
+	virtual bool operator == (Triad& term);
 	bool operator != (Triad& term);
 
 
 	friend ostream& operator<<(ostream&, Triad);
-	//friend istream& operator>>(istream&, Triad);
 };

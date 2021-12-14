@@ -1,14 +1,16 @@
 #ifndef Complex_h
 #define Complex_h
 #pragma once
+#include "D:\VS solutions\University\5 - Norm\Norm.h"
 #include <conio.h>
 #include <ostream>
 #include <istream>
+#include <math.h>
 #endif // !Complex_h
 
 using namespace std;
 
-class Complex {
+class Complex : public Norm {
 private:
 	double* A, * B;
 
@@ -37,6 +39,10 @@ public:
 
 	friend ostream& operator<<(ostream&, Complex); 
 	friend istream& operator>>(istream&, Complex); 
+
+	double Norma();
+	double Module();
+	
 };
 
 

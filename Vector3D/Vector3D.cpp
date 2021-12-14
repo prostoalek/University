@@ -1,11 +1,6 @@
 #include "Vector3D.h"
 
-Vector3D Vector3D::operator+(Vector3D& obj)
-{
-	return Vector3D(this->getTriad() + obj.getTriad());
-}
-
-double Vector3D::operator*(Vector3D& vector3d)
+double Vector3D::operator*(const Vector3D& vector3d)
 {
 	double ax, ay, az, bx, by, bz;
 	ax = this->X;
@@ -18,19 +13,21 @@ double Vector3D::operator*(Vector3D& vector3d)
 	return ax * bx + ay * by + az * bz;
 }
 
-Vector3D Vector3D::operator*(double term)
+double Vector3D::Norma()
 {
-	return (this->getTriad() * term);
+	return max(max(abs(this->X), abs(this->Y)), abs(this->Z));
 }
 
-ostream& operator<<(ostream& out, Vector3D vector3d)
+double Vector3D::Module()
 {
-	out << vector3d.getTriad();
-	return out;
+	return sqrt((this->X) * (this->X) + (this->Y) * (this->Y) + (this->Z) * (this->Z));
 }
 
-//istream& operator>>(istream& in, Vector3D vector3d)
+//std::ostream& Vector3D::operator<<(std::ostream& out, Vector3D vector3d)
 //{
-//	in >> vector3d.getTriad();
-//	return in;
+//
+//	out << '(' << vector3d.getX() << ", " << vector3d.getY() << ", " << vector3d.getZ() << ")\n";
+//	return out;
 //}
+
+

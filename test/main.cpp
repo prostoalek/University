@@ -1,25 +1,29 @@
-#include<iostream>
-#include "Triad.h"
-#include "vector3D.h"
+#include "money.hpp"
+#include <iostream>
 
-int main() {
+using namespace std;
 
-	setlocale(0, "");
-	//Triad a, b;
-	cout << "Ñîçäàéòå 2 âåêòîðà ÷èñëàìè\n";
+int main()
+{
+    setlocale(0, "");
 
-	//double q1, q2, q3, p1, p2, p3;
-	//cin >> q1 >> q2 >> q3 >> p1 >> p2 >> p3;
+    Money a(35, 60);
+    Money b(15,80);
 
-	//vector3D a(q1, q2, q3);
-	//vector3D b(p1, p2, p3);
+    Pair* p = new Money;
+    *p = a + b;
+    cout << "*Pair: " << *p;
+    Money* q = dynamic_cast<Money*>(p);
 
-	////cin >> a >> b;
-	//cout << a + b;
-
-	Triad a, b;
-
-	cin >> a >> b;
-	cout << a << b << "\n";
-	cout << a + b;
+    if (q)
+    {
+     cout << "   Ð”Ð¾: " << *q;
+     q->norm();
+     std::cout << "ÐŸÐ¾ÑÐ»Ðµ: " << *q;
+    }
+    else cout << "ÐžÐ±ÑŠÐµÐºÑ‚ Ð½Ðµ ÑÐ²Ð»ÑÐµÑ‚ÑÑ Ð¾Ð±ÑŠÐµÐºÑ‚Ð¾Ð¼ ÐºÐ»Ð°ÑÑÐ° Money\n";
+ 
+    //cout << a << "\n" << b;
+    // Money* q = (Money*)p;
+    
 }

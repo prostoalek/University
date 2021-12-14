@@ -86,6 +86,16 @@ Complex Complex::operator=(Complex& x)
 	return *this;
 }
 
+double Complex::Norma()
+{
+	return (*A) * (*A) + (*B) * (*B);
+}
+
+double Complex::Module()
+{
+	return sqrt((*A) * (*A) + (*B) * (*B));
+}
+
 ostream& operator<<(ostream& out, Complex x)
 {
 	

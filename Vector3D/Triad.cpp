@@ -51,17 +51,12 @@ void Triad::setZ(double z)
 	Z = z;
 }
 
-Triad Triad::getTriad()
-{
-	return Triad(X, Y, Z);
-}
-
 Triad Triad::operator+(double term)
 {
 	return Triad(this->X + term, this->Y + term, this->Z + term);
 }
 
-Triad Triad::operator+(Triad triad)
+Triad Triad::operator+(const Triad& triad)
 {
 	return Triad(this->X + triad.X, this->Y + triad.Y, this->Z + triad.Z);
 }
@@ -91,14 +86,3 @@ ostream& operator<<(ostream& out, Triad triad)
 	out << "(" << ax << ", " << ay << ", " << az << ")" << "\n";
 	return out;
 }
-
-//istream& operator>>(istream& in, Triad triad)
-//{
-//	double ax, ay, az;
-//	ax = triad.X;
-//	ay = triad.Y;
-//	az = triad.Z;
-//
-//	in >> ax >> ay >> az;
-//	return in;
-//}

@@ -2,20 +2,22 @@
 #define Vector3D_h
 #pragma once
 #include "Triad.h"
+#include "D:\VS solutions\University\5 - Norm\Norm.h"
+#include<iostream>
+#include <math.h>
 #endif // !Vector3D_h
 
-class Vector3D : public Triad{
+
+class Vector3D : public Triad, public Norm {
 public:
 	Vector3D() : Triad() {}
 	Vector3D(double x, double y, double z) : Triad(x, y, z) {}
 	Vector3D(const Vector3D& obj) : Triad(obj) {}
-	Vector3D(const Triad& obj) : Triad(obj) {}
 
-	Vector3D operator + (Vector3D& vector3d);
-	double operator * (Vector3D& vector3d);
-	Vector3D operator * (double term);
+	double operator * (const Vector3D& vector3d);   // скалярное произведение
 
-	friend ostream& operator<<(ostream&, Vector3D);
-	//friend istream& operator>>(istream&, Vector3D);
+	//std::ostream& operator<<(std::ostream&, Vector3D);
 
+	double Norma();
+	double Module();
 };

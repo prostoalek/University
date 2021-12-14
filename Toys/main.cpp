@@ -18,10 +18,10 @@ protected:
 	double cost;
 	bool isPackaged;
 	Color color;
-public:
+
 	Toy() : title("air"), cost(99.99), isPackaged(false), color(unknown) {}
 	Toy(string _title, double _cost, bool _isPackaged, Color _color) : title(_title), cost(_cost), isPackaged(_isPackaged), color(_color) {}
-	
+public:
 	string enumToString(Color color) {
 		switch (color) {
 		case red:
@@ -102,7 +102,7 @@ public:
 		trailer(trailertitle, trailerCost * 0.8, trailerIsPackaged, trailerColor) {}
 
 	string toString() {
-		return tractor.toString() + trailer.toString() + "\n\n";
+		return tractor.toString() + "+\n\n" + trailer.toString() + "\n\n";
 	}
 };
 
@@ -111,11 +111,10 @@ public:
 int main() {
 	setlocale(0, "");
 
-	Toy toy("Обычная игрушка", 49.90, true, green);
 	Car car("Ferrari", 149.90, true, red);
 	Tractor tractor("Трактор", 69.90, false, blue);
 	Trailer trailer("Дом для одинокого волка", 99.90, false, yellow);
 	TractorWithTrailer tractorWithTrailer("Юный тракторист", 299.90, true, red, "Прицеп для больших дядей", 39.90, true, green);
 
-	cout << toy.toString() << car.toString() << tractor.toString() << trailer.toString() << tractorWithTrailer.toString();
+	cout << car.toString() << tractor.toString() << trailer.toString() << tractorWithTrailer.toString();
 }
