@@ -3,31 +3,25 @@
 double Vector3D::operator*(const Vector3D& vector3d)
 {
 	double ax, ay, az, bx, by, bz;
-	ax = this->X;
-	ay = this->Y;
-	az = this->Z;
-	bx = vector3d.X;
-	by = vector3d.Y;
-	bz = vector3d.Z;
+	ax = A;
+	ay = B;
+	az = C;
+	bx = vector3d.A;
+	by = vector3d.B;
+	bz = vector3d.C;
 
 	return ax * bx + ay * by + az * bz;
 }
 
 double Vector3D::Norma()
 {
-	return max(max(abs(this->X), abs(this->Y)), abs(this->Z));
+	return max(max(abs(A), abs(B)), abs(C));
 }
 
 double Vector3D::Module()
 {
-	return sqrt((this->X) * (this->X) + (this->Y) * (this->Y) + (this->Z) * (this->Z));
+	return sqrt((A) * (A) + (B) * (B) + (C) * (C));
 }
 
-//std::ostream& Vector3D::operator<<(std::ostream& out, Vector3D vector3d)
-//{
-//
-//	out << '(' << vector3d.getX() << ", " << vector3d.getY() << ", " << vector3d.getZ() << ")\n";
-//	return out;
-//}
 
 

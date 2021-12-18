@@ -1,10 +1,17 @@
 #ifndef Norm_h
 #define Norm_h
 #pragma once
-#include<iostream>
 #endif // !Norm_h
 
+using namespace std;
+
 class Norm {
-	virtual double Norma() = 0 {}
-	virtual double Module() = 0 {}
+protected:
+	double A, B, C;
+
+public:
+
+	virtual double Norma() = 0;
+	virtual double Module() = 0;
+
 };

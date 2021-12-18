@@ -11,33 +11,30 @@
 using namespace std;
 
 class Complex : public Norm {
-private:
-	double* A, * B;
 
 public:
 	Complex();
-	Complex(double a, double b);
+	Complex(double re, double im);
 	Complex(const Complex& complex);
 
-	~Complex();
+public:
+	double getRe();
+	double getIm();
 
-	double getA();
-	double getB();
-
-	void setA(double a);
-	void setB(double b);
+	void setRe(double re);
+	void setIm(double im);
 
 	Complex operator+ (Complex& x);
 	Complex operator- (Complex& x);
 	Complex operator* (Complex& x);
 	Complex operator/ (Complex& x);
 
-	bool operator== (Complex& x);
-	bool operator!= (Complex& x);
+	bool operator== (Complex& complex);
+	bool operator!= (Complex& complex);
 	
-	Complex operator= (Complex& x);
+	Complex operator= (Complex& complex);
 
-	friend ostream& operator<<(ostream&, Complex); 
+	friend ostream& operator<<(ostream&, Complex);
 	friend istream& operator>>(istream&, Complex); 
 
 	double Norma();

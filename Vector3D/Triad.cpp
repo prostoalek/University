@@ -2,86 +2,96 @@
 
 Triad::Triad()
 {
-	X = 0;
-	Y = 0;
-	Z = 0;
+	A = 0;
+	B = 0;
+	C = 0;
 }
 
 Triad::Triad(double x, double y, double z)
 {
-	X = x;
-	Y = y;
-	Z = z;
+	A = x;
+	B = y;
+	C = z;
 }
 
 Triad::Triad(const Triad& triad)
 {
-	X = triad.X;
-	Y = triad.Y;
-	Z = triad.Z;
+	A = triad.A;
+	B = triad.B;
+	C = triad.C;
 }
 
 double Triad::getX()
 {
-	return X;
+	return A;
 }
 
 double Triad::getY()
 {
-	return Y;
+	return B;
 }
 
 double Triad::getZ()
 {
-	return Z;
+	return C;
 }
 
 void Triad::setX(double x)
 {
-	X = x;
+	A = x;
 }
 
 void Triad::setY(double y)
 {
-	Y = y;
+	B = y;
 }
 
 void Triad::setZ(double z)
 {
-	Z = z;
+	C = z;
 }
 
 Triad Triad::operator+(double term)
 {
-	return Triad(this->X + term, this->Y + term, this->Z + term);
+	return Triad(A + term, B + term, C + term);
 }
 
 Triad Triad::operator+(const Triad& triad)
 {
-	return Triad(this->X + triad.X, this->Y + triad.Y, this->Z + triad.Z);
+	return Triad(A + triad.A, B + triad.B, C + triad.C);
 }
 
 Triad Triad::operator*(double term)
 {
-	return Triad(this->X * term, this->Y * term, this->Z * term);
+	return Triad(A * term, B * term, C * term);
 }
 
 bool Triad::operator==(Triad& term)
 {
-	return this->X == term.X && this->Y == term.Y && this->Z == term.Z;
+	return A == term.A && B == term.B && C == term.C;
 }
 
 bool Triad::operator!=(Triad& term)
 {
-	return this->X != term.X || this->Y != term.Y || this->Z != term.Z;
+	return A != term.A || B != term.B || C != term.C;
+}
+
+double Triad::Norma()
+{
+	return 0.0;
+}
+
+double Triad::Module()
+{
+	return 0.0;
 }
 
 ostream& operator<<(ostream& out, Triad triad)
 {
 	double ax, ay, az;
-	ax = triad.X;
-	ay = triad.Y;
-	az = triad.Z;
+	ax = triad.A;
+	ay = triad.B;
+	az = triad.C;
 
 	out << "(" << ax << ", " << ay << ", " << az << ")" << "\n";
 	return out;

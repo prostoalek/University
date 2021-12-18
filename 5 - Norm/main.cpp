@@ -3,19 +3,33 @@
 #include "D:\VS solutions\University\Vector3D\Triad.h"
 #include "D:\VS solutions\University\Vector3D\Vector3D.h"
 
-//using namespace std;
-
 int main() {
+	setlocale(0, "");
 
-	Complex c(2.5, 3.2);
+	double v1, v2, v3, c1, c2;
+	
+	cout << "¬ведите действительную и мнимую части комплексного числа: ";
+	cin >> c1 >> c2;
+	cout << "\n";
 
-	double q1, q2, q3, p1, p2, p3;
-	cin >> q1 >> q2 >> q3;
-	Vector3D v(q1, q2, q3);
+	cout << "¬ведите координаты вектора: ";
+	cin >> v1 >> v2 >> v3;
+	cout << "\n";
 
-	cout << "complex c: " << c << "\nvector v: " << v << "\n";
-	cout << "Complex module: " << c.Module() << "\nXomplex norm: " << c.Norma() << "\nVector module: "
-		 << v.Module() << "\nVector norm: " << v.Norma();
+	Norm* normObjects[] = {
+		new Complex(c1, c2),
+		new Vector3D(v1, v2, v3)
+	};
+
+	Complex* C = dynamic_cast<Complex*>(normObjects[0]);
+	Vector3D* V = dynamic_cast<Vector3D*>(normObjects[1]);
+
+	cout << "Complex c: " << *C
+		 << "\nVector v: " << *V << "\n"
+		 << "\nComplex module: " << normObjects[0]->Module() 
+		 << "\nComplex norm: " << normObjects[0]->Norma() 
+		 << "\nVector module: " << normObjects[1]->Module() 
+		 << "\nVector norm: " << normObjects[1]->Norma();
 
 
 }

@@ -8,7 +8,7 @@
 #endif // !Vector3D_h
 
 
-class Vector3D : public Triad, public Norm {
+class Vector3D : public Triad {
 public:
 	Vector3D() : Triad() {}
 	Vector3D(double x, double y, double z) : Triad(x, y, z) {}
@@ -16,7 +16,6 @@ public:
 
 	double operator * (const Vector3D& vector3d);   // скалярное произведение
 
-	//std::ostream& operator<<(std::ostream&, Vector3D);
 
 	double Norma();
 	double Module();

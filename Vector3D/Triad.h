@@ -2,14 +2,12 @@
 #define Triad_h
 #pragma once
 #include<iostream>
+#include "D:\VS solutions\University\5 - Norm\Norm.h"
 #endif // !Triad_h
 
 using namespace std;
 
-class Triad {
-protected:
-	double X, Y, Z;
-
+class Triad : public Norm {
 public:
 	
 	Triad();
@@ -29,9 +27,12 @@ public:
 
 	Triad operator * (double term);
 
-	virtual bool operator == (Triad& term);
-	bool operator != (Triad& term);
-
+	virtual bool operator == (Triad& triad);
+	bool operator != (Triad& triad);
 
 	friend ostream& operator<<(ostream&, Triad);
+
+private:
+	double Norma();
+	double Module();
 };

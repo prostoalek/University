@@ -5,111 +5,113 @@
 
 Complex::Complex()
 {
-	A = new double(0);
-	B = new double(0);
+	A = 0;
+	B = 0;
+	C = 0;
 }
 
-Complex::Complex(double a, double b)
+Complex::Complex(double re, double im)
 {
-	A = new double(a);
-	B = new double(b);
+	A = re;
+	B = im;
+	C = 0;
 }
 
 Complex::Complex(const Complex& complex)
 {
-	A = new double(*complex.A);
-	B = new double(*complex.B);
+	A = complex.A;
+	B = complex.B;
+	C = 0;
 }
 
 Complex::~Complex()
 {
-	delete[] A;
-	delete[] B;
+	
 }
 
 
 
-double Complex::getA()
+double Complex::getRe()
 {
-	return *A;
+	return A;
 }
 
-double Complex::getB()
+double Complex::getIm()
 {
-	return *B;
+	return B;
 }
 
-void Complex::setA(double a)
+void Complex::setRe(double re)
 {
-	A = new double(a);
+	A = re;
 }
 
-void Complex::setB(double b)
+void Complex::setIm(double im)
 {
-	B = new double(b);
+	B = im;
 }
 
-Complex Complex::operator+(Complex &x)
+Complex Complex::operator+(Complex &complex)
 {
-	return Complex(*A + *(x.A), *B + *(x.B));
+	return Complex(A + complex.A, B + complex.B);
 }
 
-Complex Complex::operator-(Complex& x)
+Complex Complex::operator-(Complex& complex)
 {
-	return Complex(*A - *(x.A), *B - *(x.B));;
+	return Complex(A - complex.A, B - complex.B);
 }
 
-Complex Complex::operator*(Complex& x)
+Complex Complex::operator*(Complex& complex)
 {
-	return Complex(*A * *(x.A) + *B * *(x.B), *B * *(x.A) + *A * *(x.B));
+	return Complex(A * complex.A + B * complex.B, B * complex.A + A * complex.B);
 }
 
-Complex Complex::operator/(Complex& x)
+Complex Complex::operator/(Complex& complex)
 {
-	return Complex( (*A * *(x.A) + *B * *(x.B)) / (*(x.A) * *(x.A) + *(x.B) * *(x.B)), (*B * *(x.A) - *A * *(x.B)) / (*(x.A) * *(x.A) + *(x.B) * *(x.B)));
+	return Complex( (A * complex.A + B * complex.B) / (complex.A * complex.A + complex.B * complex.B), (B * complex.A - A * complex.B) / (complex.A * complex.A + complex.B * complex.B));
 }
 
-bool Complex::operator==(Complex& x)
+bool Complex::operator==(Complex& complex)
 {
-	return *A == *(x.A) && *B == *(x.B);
+	return A == complex.A && B == complex.B;
 }
 
-bool Complex::operator!=(Complex& x)
+bool Complex::operator!=(Complex& complex)
 {
-	return *A != *(x.A) && *B != *(x.B);
+	return A != complex.A && B != complex.B;
 }
 
-Complex Complex::operator=(Complex& x)
+Complex Complex::operator=(Complex& complex)
 {
-	A = new double(*x.A);
-	B = new double(*x.B);
+	A = complex.A;
+	B = complex.B;
 	return *this;
 }
 
 double Complex::Norma()
 {
-	return (*A) * (*A) + (*B) * (*B);
+	return A * A + B * B;
 }
 
 double Complex::Module()
 {
-	return sqrt((*A) * (*A) + (*B) * (*B));
+	return sqrt(this->Norma());
 }
 
-ostream& operator<<(ostream& out, Complex x)
+ostream& operator<<(ostream& out, Complex complex)
 {
 	
-	out << *(x.A);
-	if (*(x.B) > 0)
+	out << complex.A;
+	if (complex.B > 0)
 		out << "+";
-	out << *(x.B) << 'i' << "\n";
+	out << complex.B << 'i' << "\n";
 
 	return out;
 }
 
-istream& operator>>(istream& in, Complex x)
+istream& operator>>(istream& in, Complex complex)
 {
-	in >> *(x.A) >> *(x.B);
+	in >> complex.A >> complex.B;
 
 	return in;
 }
