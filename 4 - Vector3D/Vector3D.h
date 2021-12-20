@@ -14,8 +14,7 @@ public:
 	Vector3D(double x, double y, double z) : Triad(x, y, z) {}
 	Vector3D(const Vector3D& obj) : Triad(obj) {}
 
-	double operator * (const Vector3D& vector3d);   // скалярное произведение
-
+	double scalar(const Vector3D& vector3d);
 
 	double Norma();
 	double Module();

@@ -2,35 +2,6 @@
 #include <cmath>
 #include <string>
 
-
-Complex::Complex()
-{
-	A = 0;
-	B = 0;
-	C = 0;
-}
-
-Complex::Complex(double re, double im)
-{
-	A = re;
-	B = im;
-	C = 0;
-}
-
-Complex::Complex(const Complex& complex)
-{
-	A = complex.A;
-	B = complex.B;
-	C = 0;
-}
-
-Complex::~Complex()
-{
-	
-}
-
-
-
 double Complex::getRe()
 {
 	return A;

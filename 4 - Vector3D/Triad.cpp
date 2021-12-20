@@ -1,55 +1,5 @@
 #include "Triad.h"
 
-Triad::Triad()
-{
-	A = 0;
-	B = 0;
-	C = 0;
-}
-
-Triad::Triad(double x, double y, double z)
-{
-	A = x;
-	B = y;
-	C = z;
-}
-
-Triad::Triad(const Triad& triad)
-{
-	A = triad.A;
-	B = triad.B;
-	C = triad.C;
-}
-
-double Triad::getX()
-{
-	return A;
-}
-
-double Triad::getY()
-{
-	return B;
-}
-
-double Triad::getZ()
-{
-	return C;
-}
-
-void Triad::setX(double x)
-{
-	A = x;
-}
-
-void Triad::setY(double y)
-{
-	B = y;
-}
-
-void Triad::setZ(double z)
-{
-	C = z;
-}
 
 Triad Triad::operator+(double term)
 {

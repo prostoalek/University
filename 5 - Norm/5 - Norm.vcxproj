@@ -19,15 +19,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Complex\Complex.h" />
-    <ClInclude Include="..\Vector3D\Triad.h" />
-    <ClInclude Include="..\Vector3D\Vector3D.h" />
+    <ClInclude Include="..\2 - Complex\Complex.h" />
+    <ClInclude Include="..\4 - Vector3D\Triad.h" />
+    <ClInclude Include="..\4 - Vector3D\Vector3D.h" />
     <ClInclude Include="Norm.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Complex\Complex.cpp" />
-    <ClCompile Include="..\Vector3D\Triad.cpp" />
-    <ClCompile Include="..\Vector3D\Vector3D.cpp" />
+    <ClCompile Include="..\2 - Complex\Complex.cpp" />
+    <ClCompile Include="..\4 - Vector3D\Triad.cpp" />
+    <ClCompile Include="..\4 - Vector3D\Vector3D.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

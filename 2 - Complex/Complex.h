@@ -13,9 +13,9 @@ using namespace std;
 class Complex : public Norm {
 
 public:
-	Complex();
-	Complex(double re, double im);
-	Complex(const Complex& complex);
+	Complex() : Norm() {}
+	Complex(double re, double im) : Norm(re, im, 0) {}
+	Complex(const Complex& complex) : Norm(complex) {}
 
 public:
 	double getRe();
