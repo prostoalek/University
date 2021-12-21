@@ -1,135 +1,184 @@
 #include <iostream>
+
 using namespace std;
 
-//#include <stdexcept>
-//#include "func.h"
-
-// связанный список
-template <typename T> class List; // Предварительное объявление, используется для объявления класса друга
-template <typename N>
-class Iterator {
-
-    N* pos;
-    template <typename T> friend class List; // шаблон списка может получить доступ к закрытым членам для вставки и удаления
-
-public:
-    // Переименование различных типов для облегчения извлечения других шаблонов
-    /*typedef typename N::value_type value_type;
-    typedef typename N::reference_type reference_type;
-    typedef typename N::const_reference_type const_reference_type;
-    typedef Iterator<N> self_type;*/
-
-    // Создаем пустой итератор
-    Iterator() :pos(0) {}
-    Iterator(N* pos) : pos(pos) {}
-
-    bool operator !=(self_type const& right)const {
-        return pos != right.pos;
-    }
-
-    bool operator ==(self_type const& right)const {
-        return pos != right.pos;
-    }
-
-    self_type& operator++() {
-        if (pos) pos = pos->next;
-        return *this;
-    }
-    /*reference_type operator*()throw (std::runtime_error) {
-        if (pos) return pos->value;
-            else 
-            throw (std::runtime_error("dereferencing null iterator"));
-    }*/
-
-};
-
-// Шаблон контейнера двустороннего связанного списка
-template <typename T>
-struct Node {
-    /*typedef T value_type;
-    typedef T& reference_type;
-    typedef const T& const_reference_type;*/
-
-    T value;
-    Node* prev;
-    Node* next;
-    Node(T const& value, Node* prev, Node* next) :value(value), prev(prev), next(next) {}
-};
-// Шаблон двойного связанного списка
-template <typename T>
+template <class T>
 
 class List {
-    //typedef Node<T> Node<T>;
-    Node<T>* head; // Указатель узла головы
+private:
+    struct Node {
+        T value;
+        Node* next;
+        Node(T _value) : value(_value), next(nullptr) {}
+    };
+
+    Node* head;
+
 public:
-    //typedef T value_type;
-    //typedef Iterator<Node<T>>iterator;
 
-    List() :head() {}
-    ~List() {
-        // Удаляем пространство узла связанного списка, когда отмечен галочкой связанный список
+    List() : head(nullptr) {}
+    List(T _value) {
+        Node* p = new Node(_value);
+        head = p;
+    }
+
+    ~List() {  }
+
+
+    bool isEmpty() {
+        return head == nullptr;
+    }
+
+    /*void insertAfter(Node* elem, T value) {
+
+        Node* el = new Node(value);
+        el->next = elem->next;
+        elem->next = el;
+    }*/
+
+    void erase(Node* elem) {
+        Node* el = elem->next;
+        elem->next = el->next;
+        el->next = nullptr;
+        delete el;
+    }
+
+    void addToHead(T _value) {
+        Node* p = new Node(_value);
+        if (isEmpty()) {
+            head = p;
+            return;
+        }
+        p->next = head;
+        head = p;
+    }
+
+    template<std::size_t N> void addToHead(T(&array)[N]) {
+        Node* p = new Node(array[0]);
+        if (isEmpty())
+            head = p;
+
+        for (int i = 1; i < N; i++) {
+            Node* p = new Node(array[i]);
+            p->next = head;
+            head = p;
+        }
+    }
+
+    void addToTail(T _value) {
+        Node* p = new Node(_value);
+        if (isEmpty()) {
+            head = p;
+            return;
+        }
+        Node* iter = head;
+        while (iter->next != 0) {
+            iter = iter->next;
+        }
+        iter->next = p;
+    }
+
+    void print() {
+        if (isEmpty())
+            return;
+        Node* p = head;
+        while (p) {
+            cout << p->value << " ";
+            p = p->next;
+        }
+        cout << endl;
+    }
+
+    Node* find(T _value) {
+        Node* p = head;
+        while (p && p->value != _value)
+            p = p->next;
+        return (p && p->value == _value) ? p : nullptr;
+    }
+
+    void removeFirst() {
+        if (isEmpty())
+            return;
+        Node* p = head;
+        head = p->next;
+        delete p;
+        size--;
+    }
+
+    void removeLast() {
+        if (isEmpty())
+            return;
+        if (head->next == nullptr) {
+            removeFirst();
+            return;
+        }
+
+        Node* p = head;
+        while (p->next != nullptr)
+            p = p->next;
+        delete p->next;
+        p->next = nullptr;
+        size--;
+    }
+
+    void addAfterNode(Node* elem, T _value) {
+        if (elem == NULL) {
+            cout << "Element does not exist." << endl;
+            return;
+        }
+        Node* newElem = new Node(_value);
+        newElem->next = elem->next;
+        elem->next = newElem;
+        size++;
+    }
+
+    void del(T _value) {
+        if (isEmpty())
+            return;
+        if (head->value == _value) {
+            removeFirst();
+            return;
+        }
+        Node* slow = head;
+        Node* fast = head->next;
+        while (fast && fast->value != _value) {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        if (!fast) {
+            cout << "Element does not exist." << endl;
+            return;
+        }
+        slow->next = fast->next;
+        delete fast;
+        size--;
+    }
+
+    void del(Node* elem) {
+
+    }
+
+    void delAll() {
         while (head)
-        {
-            Node<T>* n = head;
-            head = head->next;
-            delete n;
+            removeFirst();
+    }
+
+    Node* operator[] (const int index) {
+        if (isEmpty())
+            return nullptr;
+
+        Node* p = head;
+        for (int i = 0; i < index; i++) {
+            p = p->next;
+            if (!p)
+                return nullptr;
         }
-
-    }
-
-    // Вставляем данные из заголовка таблицы
-    void push_front(T const& v) {
-        head = new Node<T>(v, 0, head);
-        if (head > next) {
-            head->next->prev = head;
-        }
-    }
-    // Удалить данные из заголовка таблицы
-    void pop_front(T const& v) {
-        if (head) {
-            Node<T>* n = head;
-            head = head->next;
-            head->prev = 0;
-            delete n;
-        }
-    }
-
-    // Вставить данные из указанной позиции
-    void insert(iterator it, T const& v) {
-        Node<T>* n = it.pos;
-        if (n) {
-            Node<T>* new_node = new Node<T>(v, n, n->next);
-            new_node->next->prev = new_node;
-            n->next = new_node;
-        }
-    }
-
-    // Удалить указанный элемент
-    void erase(iterator& it) {
-        Node<T>* n = it.pos;
-        ++it;
-        if (n) {
-            if (n->next)n->next->prev = n->prev;
-            if (n->prev) n->prev->next = n->next;
-            if (head == n) {
-                head = n->next;
-            }
-            delete n;
-        }
-    }
-
-    bool is_empty()const { return head == 0; }
-
-    // Возвращаемся к итератору, указывающему на головной узел связанного списка
-    iterator begin() {
-        return iterator(head);
-    }
-    // Пустой итератор представляет конец связанного списка
-    iterator end() {
-        return iterator();
+        return p;
     }
 
 };
+
+
 
 int main()
 {
@@ -144,16 +193,14 @@ int main()
         cin >> a[i];
     cout << "\n";
 
-    //l.addToHead(a);
-    List<int>::Iterator iter1 = l.begin();
-    List<int>::Iterator iter2 = l.end();
+    l.addToHead(a);
 
-    while (iter1 != iter2)
-    {
-        std::cout << *iter1 << "\n";
-        iter1++;
-    }
+    l.print();
 
-    //l.print();
+    l.addAfterNode(l[2], 5);
+    l.print();
+
+    l.erase(l[3]);
+    l.print();
 
 }

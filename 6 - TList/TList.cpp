@@ -1,132 +1,87 @@
 ﻿#include <iostream>
-
 using namespace std;
 
-template <class T>
+template <typename T>
+
 
 class List {
-private:
+private:   
     struct Node {
-        T value;
-        Node* next;
-        Node* prev;
-        Node(T _value) : value(_value), next(nullptr), prev(nullptr) {}
+        T value; 
+        Node* next; 
+        Node(T _value) : value(_value), next(nullptr) {}
     };
 
-    Node* Head;
-    Node* Tail;
-    Iterator* head;
-    Iterator* tail;
-    size_t size;
+    Node* head;
 
 public:
-    class Iterator;
-
-    List() : Head(nullptr), Tail(nullptr), size(0) {}
+    List() : head(nullptr) {} 
     List(T _value) {
         Node* p = new Node(_value);
-        Head = p;
-        Tail = p;
-        size = 1;
+        head = p;
     }
-
-    ~List() { delete[] Head; delete[] Tail }  
-
-    Iterator begin() { 
-        return Head; 
-    }
-
-    Iterator end() { 
-        return Tail; 
-    }
-
-    Iterator begin() const {
-        return Head;
-    }
-
-    Iterator end() const {
-        return Tail;
-    }
+    
+    ~List() { delete head; }
 
 
     bool isEmpty() {
-        return Head == Tail;
+        return head == nullptr;
     }
 
-    void insert(Iterator iter, const T& value) {
-        Node* el = iter.elem;
-        if (iter == --end())
-            addToTail(value);
-        else {
-            Node* nextelem = iter.elen->next;
-            Node* p = new Node(value);
-            p->next = nextelem;
-            p->prev - el;
-            nextelem = p;
-            el->next = p;
+    void erase(Node* elem) {
+
+        Node* prev = head;
+        if (elem != head) {
+            while (prev->next != elem)
+                prev = prev->next;
+
+            prev->next = elem->next;
+            elem->next = nullptr;
+            delete[] elem;
         }
-        size++;
-    }
-
-    void erase(Iterator iter) {
-        Node* el = iter.elem;
-        if (iter.begin())
+        else
             removeFirst();
-        else {
-            Node* prevelem = iter.elem->prev;
-            Node* nextelem = iter.elem->next;
-            prevelem->next = nextelem;
-            nextelem->prev = prevelem;
-            delete el;
-        }
-        size--;
     }
 
     void addToHead(T _value) {
         Node* p = new Node(_value);
         if (isEmpty()) {
-            Head = p;
-            Tail = p;
+            head = p;
             return;
         }
-        p->next = Head;
-        Head = p;
-        Tail = nullptr;
-        size++;
+        p->next = head;
+        head = p;
     }
 
-    template<std::size_t N> void addToHead(T (&array)[N]) {
+    template<std::size_t N> void addToHead(T(&array)[N]) {
         Node* p = new Node(array[0]);
         if (isEmpty())
-            Head = p;
+            head = p;
 
         for (int i = 1; i < N; i++) {
             Node* p = new Node(array[i]);
-            p->next = Head;
-            Head = p;
+            p->next = head;
+            head = p;
         }
     }
 
-    void addToTail(T _value) {
+    void pushBack(T _value) {
         Node* p = new Node(_value);
         if (isEmpty()) {
-            Head = p;
-            Tail = p;
+            head = p;
             return;
         }
-        /*Node* iter = Head;
+        Node* iter = head;
         while (iter->next != 0) {
             iter = iter->next;
         }
-        iter->next = p;*/
-        Tail->next = p;
-        size++;
+        iter->next = p;
     }
 
     void print() {
         if (isEmpty())
             return;
-        Node* p = Head;
+        Node* p = head;
         while (p) {
             cout << p->value << " ";
             p = p->next;
@@ -135,7 +90,7 @@ public:
     }
 
     Node* find(T _value) {
-        Node* p = Head;
+        Node* p = head;
         while (p && p->value != _value)
             p = p->next;
         return (p && p->value == _value) ? p : nullptr;
@@ -144,48 +99,53 @@ public:
     void removeFirst() {
         if (isEmpty())
             return;
-        Node* p = Head;
-        Head = p->next;
+        Node* p = head;
+        head = p->next;
         delete p;
-        size--;
     }
 
     void removeLast() {
         if (isEmpty())
             return;
-        if (Head->next == nullptr) {
+        if (head->next == nullptr) {
             removeFirst();
             return;
         }
-
-        Node* p = Head;
+        Node* p = head;
         while (p->next != nullptr)
             p = p->next;
         delete p->next;
         p->next = nullptr;
-        size--;
     }
 
-    void addAfterNode(Node* elem, T _value) {
+    void insert(Node* elem, T _value) {
         if (elem == NULL) {
             cout << "Element does not exist." << endl;
             return;
         }
-        Node* newElem = new Node(_value);
-        newElem->next = elem->next;
-        elem->next = newElem;
-        size++;
+        Node* prev = head;
+
+        if (elem != head) {
+            while (prev->next != elem)
+                prev = prev->next;
+
+            Node* newElem = new Node(_value);
+            newElem->next = prev->next;
+            prev->next = newElem;
+        }
+        else
+            addToHead(_value);
     }
 
     void del(T _value) {
         if (isEmpty())
             return;
-        if (Head->value == _value) {
+        if (head->value == _value) {
             removeFirst();
             return;
         }
-        Node* slow = Head;
-        Node* fast = Head->next;
+        Node* slow = head;
+        Node* fast = head->next;
         while (fast && fast->value != _value) {
             fast = fast->next;
             slow = slow->next;
@@ -196,20 +156,18 @@ public:
         }
         slow->next = fast->next;
         delete fast;
-        size--;
     }
 
     void delAll() {
-        while (Head)
+        while (head)
             removeFirst();
-        size = 0;
     }
 
     Node* operator[] (const int index) {
         if (isEmpty())
             return nullptr;
 
-        Node* p = Head;
+        Node* p = head;
         for (int i = 0; i < index; i++) {
             p = p->next;
             if (!p)
@@ -218,76 +176,49 @@ public:
         return p;
     }
 
-
-
-    class Iterator {
-        friend class List<T>;
-    private:
-        Node* elem;
-
-    public:
-        Iterator() : elem(0) {}
-        Iterator(Node* el) : elem(el) {}
-        Iterator(const Iterator& iter) : elem(iter.elem) {}
-
-        Iterator operator++(int) {
-            if (elem != 0)
-                elem = elem->next;
-            return *this;
-        }
-
-        Iterator operator--(int) {
-            if (elem != 0)
-                elem = elem->prev;
-            return *this;
-        }
-
-        T& operator*() const {
-            return elem->value;
-        }
-
-        bool operator==(const Iterator& iter) {
-            return elem == iter.elem;
-        }
-
-        bool operator!=(const Iterator& iter) {
-            return !(*this == iter);
-        }
-
-        Iterator& operator+(size_t n)
-        {
-            for (int i = 0; i < n; i++)
-                elem = elem->next;
-            return *this;
-        }
-    };
 };
 
 
 
 int main()
-{   
-    List<int> l;
-    
+{
+     setlocale(0, "");
 
-    const int n = 5;
+     List<int> l;
 
-    int a[n];
+     const int n = 5;
 
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
-    cout << "\n";
+     int a[n];
 
-    l.addToHead(a);
-    List<int>::Iterator iter1 = l.begin();
-    List<int>::Iterator iter2 = l.end();
+     cout << "Введите элементы списка: ";
 
-    while(iter1 != iter2)
-    {
-        std::cout << *iter1 << "\n";
-        iter1++;
-    }
+     for (int i = 0; i < n; i++)
+         cin >> a[i];
+     cout << "\n";
 
-    //l.print();
+     l.addToHead(a);
+
+     l.print();
+     
+     cout << "Введите номер (1..n) и элемент для добавления в список: ";
+     int i, elem;
+     cin >> i >> elem;
+     i--;
+
+     if(i >= 0 && i < n)
+        l.insert(l[i], elem);
+
+     l.print();
+
+     cout << "Введите номер (1..n) удаляемого элемента: ";
+     int j;
+     cin >> j;
+     j--;
+
+     if (j >= 0 && j < n)
+         l.erase(l[j]);
+
+
+     l.print();
 
 }
